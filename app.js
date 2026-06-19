@@ -28,11 +28,14 @@ createAutoComplete({
     const imgSrc = movie.Poster === "N/A" ? "" : movie.Poster;
     return `
     <img src = "${imgSrc}" />
-      ${movie.Title}
+      ${movie.Title} (${movie.Year})
     `;
   },
   onOptionSelect(movie) {
     onMovieSelect(movie);
+  },
+  inputValue(movie) {
+    return movie.Title;
   },
 });
 
