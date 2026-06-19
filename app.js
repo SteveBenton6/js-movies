@@ -23,12 +23,17 @@ const fetchData = async (searchTerm) => {
 
 createAutoComplete({
   root: document.querySelector(".autocomplete"),
-});
-createAutoComplete({
-  root: document.querySelector(".autocomplete-two"),
-});
-createAutoComplete({
-  root: document.querySelector(".autocomplete-three"),
+  fetchData,
+  renderOption(movie) {
+    const imgSrc = movie.Poster === "N/A" ? "" : movie.Poster;
+    return `
+    <img src = "${imgSrc}" />
+      ${movie.Title}
+    `;
+  },
+  onOptionSelect(movie) {
+    onMovieSelect(movie);
+  },
 });
 
 const onMovieSelect = async (movie) => {
@@ -47,7 +52,7 @@ const movieTemplate = (movieDetail) => {
     <article class = "media">
       <figure class="media-left">
         <p class = "image">
-          <img src ="${movieDetail.Poster}" ?>
+          <img src ="${movieDetail.Poster}" />
         <p>
       </figure>
       <div class = "media-content">
